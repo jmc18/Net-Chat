@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NetChat.Persistence;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NetChat.API.Controllers
 {
@@ -16,9 +18,9 @@ namespace NetChat.API.Controllers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var channels = _context.Channels.ToList();
+            var channels = await _context.Channels.ToListAsync();
 
             return Ok(channels);
         }
